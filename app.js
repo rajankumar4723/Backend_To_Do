@@ -16,20 +16,14 @@ config({
 app.use(express.json()); //Make Sure Uppere json, down routes OK
 app.use(cookieParser());
 
-app.use("/api/v1/users", userRouter);
-app.use("/api/v1/task", taskRouter);
-// app.use(cors({
-//     origin: process.env.FRONTEND_URL,
-//     credentials: true,
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-// }));
 app.use(cors({
-    origin: process.env.FRONTEND_URL,  // Allow frontend URL
+    origin: process.env.FRONTEND_URL,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/task", taskRouter);
 
 //How to get User Information
 app.get("/", (req, res) => {
