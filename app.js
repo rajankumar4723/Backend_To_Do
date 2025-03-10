@@ -18,10 +18,16 @@ app.use(cookieParser());
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/task", taskRouter);
+// app.use(cors({
+//     origin: process.env.FRONTEND_URL,
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+// }));
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL,  // Allow frontend URL
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
 
