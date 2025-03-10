@@ -19,17 +19,16 @@ app.use(cookieParser());
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/task", taskRouter);
 app.use(cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",  // Allow frontend URL
+    origin: process.env.FRONTEND_URL,
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
 
 //How to get User Information
 app.get("/", (req, res) => {
     res.send("Mahadev");
-
+ 
 });
 //Used Middleware 
 app.use(errorMiddleware);
