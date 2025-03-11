@@ -1,15 +1,15 @@
 import express from "express";
 import { deleteTask, getMyTask, newTask, updateTask } from "../controllers/task.js";
-import { isAuthenticted } from "../middlewares/auth.js";
+import { isAuthenticated } from "../middlewares/auth.js";
 
 const router = express.Router();
 
 
-router.post("/new", isAuthenticted, newTask);
+router.post("/new", isAuthenticated, newTask);
 
-router.get("/me", isAuthenticted, getMyTask);
+router.get("/me", isAuthenticated, getMyTask);
 
-router.route("/:id").put(isAuthenticted, updateTask).delete(isAuthenticted, deleteTask); //Make Sure delete or update only logged in user can change..
+router.route("/:id").put(isAuthenticated, updateTask).delete(isAuthenticated, deleteTask); //Make Sure delete or update only logged in user can change..
 
 
 
