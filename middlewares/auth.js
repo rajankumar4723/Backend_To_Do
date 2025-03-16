@@ -18,3 +18,12 @@ export const isAuthenticated = async (req, res, next) => {
 
 
 }
+export const isAdmin = (req, res, next) => {
+    if (!req.user || !req.user.isAdmin) {
+        return res.status(403).json({
+            success: false,
+            message: "Access Denied! Admins only",
+        });
+    }
+    next();
+};

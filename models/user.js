@@ -2,21 +2,22 @@ import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
     name: {
-        type:String,
-        require:true,
-
+        type: String,
+        required: true,
     },
     email: {
         type: String,
         unique: true,
-        require:true, 
-
+        required: true,
     },
     password: {
         type: String,
-        select: false,  //const user = await User.findOne({ email }).select("+password");
-        require:true,
-
+        select: false, 
+        required: true,
+    },
+    isAdmin: { 
+        type: Boolean, 
+        default: false // Default users are not admins
     },
     createdAt: {
         type: Date,

@@ -6,6 +6,44 @@ import ErrorHandler from "../middlewares/error.js";
 // export const getAllusers = async (req, res) => {
 
 // };
+export const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+        res.status(200).json({
+            success: true,
+            users,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
+    }
+};
+
+export const userUpdate = async (req, res) => {
+    const { email, isAdmin } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+        return res.status(404).json({ success: false, message: "User not found" });
+    }
+
+    user.isAdmin = isAdmin;
+    await user.save();
+
+    res.json({ success: true, message: "User updated successfully", user });
+}
+
+export const getAdminDashboard = async (req, res) => {
+    res.status(200).json({
+        success: true,
+        message: "Welcome Admin!",
+        user: req.user
+    });
+};
+
+
 
 export const login = async (req, res, next) => {
     try {
