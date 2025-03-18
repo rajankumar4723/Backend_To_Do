@@ -8,9 +8,8 @@ import { getAllUsers } from "../controllers/user.js";
 const router = express.Router();
 
 // router.get("/all", getAllusers) For Admin panel for show all Users
-router.get("/admin", isAuthenticated, getAllUsers);
 
-router.get("/admin/users", isAuthenticated, getAllUsers);
+router.get("/admin", isAuthenticated, getAllUsers);
 
 
 router.get("/getadmindashboard", isAuthenticated, isAdmin, getAdminDashboard);
