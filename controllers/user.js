@@ -6,28 +6,20 @@ import ErrorHandler from "../middlewares/error.js";
 // export const getAllusers = async (req, res) => {
 
 // };
-export const getAllUsers = async (req, res, next) => {
+export const getAllUsers = async (req, res) => {
     try {
-        // Check if the logged-in user is an admin
-        if (!req.user || !req.user.isAdmin) {
-            return res.status(403).json({
-                success: false,
-                message: "Access Denied! Admin Only",
-            });
-        }
-
-        // Fetch all users with passwords and tasks populated
-        const users = await User.find().select("+password").populate("tasks");
-
+        const users = await User.find();
         res.status(200).json({
             success: true,
             users,
         });
     } catch (error) {
-        next(error);
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error",
+        });
     }
 };
-
 
 export const userUpdate = async (req, res) => {
     const { email, isAdmin } = req.body;
